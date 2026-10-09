@@ -1,0 +1,77 @@
+:root {
+  --app-bg: #f4f6f8;
+  --app-surface: #ffffff;
+  --app-border: #e3e7eb;
+  --app-text: #1f2933;
+  --app-muted: #66788a;
+  --app-sidebar: #0f2a2a;
+  --app-sidebar-text: #cfe3e1;
+  --app-sidebar-active: #134e4a;
+  --app-warn-bg: #fff4e5;
+  --app-warn-text: #8a4b00;
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 15px;
+  color: var(--app-text);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--app-bg); }
+body { min-height: 100vh; }
+a { color: inherit; }
+
+/* PrimeVue components inherit the Bangla-friendly font */
+.p-component, .p-inputtext, .p-button, .p-datatable { font-family: inherit; }
+
+.page { padding: 20px 24px 40px; max-width: 1400px; }
+.page-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.page-header h1 { font-size: 1.4rem; margin: 0; font-weight: 600; }
+.page-header .actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+.card { background: var(--app-surface); border: 1px solid var(--app-border); border-radius: 10px; padding: 16px; }
+.card + .card { margin-top: 16px; }
+.card h2 { font-size: 1.05rem; margin: 0 0 12px; font-weight: 600; }
+
+.grid { display: grid; gap: 16px; }
+.grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 960px) {
+  .grid.cols-3, .grid.cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .grid.cols-2, .grid.cols-3, .grid.cols-4 { grid-template-columns: minmax(0, 1fr); }
+  .page { padding: 14px 12px 32px; }
+}
+
+.form { display: grid; gap: 14px; }
+.form .field { display: flex; flex-direction: column; gap: 6px; }
+.form .field label { font-size: 0.9rem; font-weight: 500; color: var(--app-muted); }
+.form .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 640px) { .form .row { grid-template-columns: minmax(0, 1fr); } }
+.form .p-inputtext, .form .p-select, .form .p-inputnumber, .form .p-datepicker, .form .p-password, .form .p-multiselect { width: 100%; }
+.form .p-inputnumber-input, .form .p-password-input { width: 100%; }
+
+.filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+.filters .field { display: flex; flex-direction: column; gap: 4px; min-width: 160px; }
+.filters .field label { font-size: 0.8rem; color: var(--app-muted); }
+
+.stat { display: flex; flex-direction: column; gap: 4px; }
+.stat .label { color: var(--app-muted); font-size: 0.9rem; }
+.stat .value { font-size: 1.5rem; font-weight: 600; }
+
+.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.muted { color: var(--app-muted); }
+.small { font-size: 0.85rem; }
+.nowrap { white-space: nowrap; }
+.mt { margin-top: 16px; }
+.flex { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.spacer { flex: 1; }
+
+.bar { height: 8px; border-radius: 4px; background: #e6efee; overflow: hidden; min-width: 60px; }
+.bar > span { display: block; height: 100%; background: var(--p-primary-500); }
+
+@media print {
+  .no-print, .sidebar, .topbar { display: none !important; }
+  .page { padding: 0; }
+  .card { border: none; }
+}

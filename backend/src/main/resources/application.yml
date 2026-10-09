@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: ccms
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3307/ccms?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Dhaka&allowPublicKeyRetrieval=true&useSSL=false}
+    username: ${DB_USERNAME:ccms}
+    password: ${DB_PASSWORD:ccms_dev_pw}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: Asia/Dhaka
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    time-zone: Asia/Dhaka
+
+ccms:
+  jwt:
+    # Override JWT_SECRET in every non-dev environment (min 32 bytes, base64).
+    secret: ${JWT_SECRET:ZGV2LW9ubHktc2VjcmV0LWNoYW5nZS1tZS1pbi1wcm9kdWN0aW9uLTEyMzQ1Njc4OTA=}
+    expiry-hours: ${JWT_EXPIRY_HOURS:12}
+  bootstrap-admin:
+    # Created on first start only if no ADMIN user exists.
+    username: ${ADMIN_USERNAME:admin}
+    password: ${ADMIN_PASSWORD:Admin@12345}
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:5173}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
