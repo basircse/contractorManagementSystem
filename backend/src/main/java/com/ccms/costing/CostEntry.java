@@ -22,7 +22,8 @@ import java.time.LocalDateTime;
 @Table(name = "cost_entry")
 public class CostEntry {
 
-    public enum SourceType { LABOUR, VENDOR, MATERIAL, OVERHEAD }
+    /** VENDOR and OVERHEAD are reserved; MATERIAL = purchases, EXPENSE = other site spends. */
+    public enum SourceType { LABOUR, VENDOR, MATERIAL, OVERHEAD, RENTAL, SUBCONTRACT, EXPENSE }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,6 +48,8 @@ public class CostEntry {
     private Long unitId;
     private Long workItemId;
     private Long labourId;
+    private Long partyId;
+    private Long materialId;
 
     @Column(nullable = false)
     private BigDecimal days = BigDecimal.ZERO;
@@ -77,6 +80,8 @@ public class CostEntry {
         r.unitId = unitId;
         r.workItemId = workItemId;
         r.labourId = labourId;
+        r.partyId = partyId;
+        r.materialId = materialId;
         r.days = days.negate();
         r.otHours = otHours.negate();
         r.dailyRate = dailyRate;

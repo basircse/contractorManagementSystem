@@ -42,6 +42,16 @@ public class ReportController {
         return reports.balances(null);
     }
 
+    /** Profit by site and by work item. Default period: all time up to today. */
+    @GetMapping("/profit")
+    public ProfitReport profit(@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
+                               @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
+                               @RequestParam(required = false) Long siteId) {
+        LocalDate end = to != null ? to : LocalDate.now();
+        LocalDate start = from != null ? from : LocalDate.of(2000, 1, 1);
+        return reports.profit(start, end, siteId);
+    }
+
     @GetMapping("/dashboard")
     public Dashboard dashboard(@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
                                @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {

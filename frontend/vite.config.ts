@@ -10,7 +10,8 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
-      '/api': 'http://localhost:8080',
+      // API_PROXY lets a second dev server talk to another backend, e.g. http://localhost:8081
+      '/api': process.env.API_PROXY ?? 'http://localhost:8080',
     },
   },
 })

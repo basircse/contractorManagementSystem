@@ -41,6 +41,8 @@ const trend = computed(() => {
   return days
 })
 const trendMax = computed(() => Math.max(1, ...trend.value.map((x) => x.amount)))
+const SOURCES = ['labour', 'material', 'rental', 'subcontract', 'expense'] as const
+const splitMax = computed(() => Math.max(1, ...SOURCES.map((s) => Number(d.value?.periodSplit[s] ?? 0))))
 </script>
 
 <template>
@@ -56,6 +58,26 @@ const trendMax = computed(() => Math.max(1, ...trend.value.map((x) => x.amount))
         <div class="card stat"><span class="label">{{ t('dashboard.workersToday') }}</span><span class="value">{{ fmt.num(d.workersToday) }}</span><span class="muted small">{{ t('dashboard.activeLabours') }}: {{ fmt.num(d.activeLabours) }}</span></div>
         <div class="card stat"><span class="label">{{ t('dashboard.periodCost') }}</span><span class="value">{{ fmt.money(d.periodCost) }}</span><span class="muted small">{{ t('dashboard.activeSites') }}: {{ fmt.num(d.activeSites) }}</span></div>
         <div class="card stat"><span class="label">{{ t('dashboard.totalDue') }}</span><span class="value">{{ fmt.money(d.totalDue) }}</span></div>
+      </div>
+
+      <h2 class="section">{{ t('dashboard.money') }}</h2>
+      <div class="grid cols-4">
+        <RouterLink to="/app/bills" class="card stat link-card"><span class="label">{{ t('dashboard.billed') }}</span><span class="value">{{ fmt.money(d.periodBilled) }}</span>
+          <span class="muted small">{{ t('dashboard.received') }}: {{ fmt.money(d.periodReceived) }}</span></RouterLink>
+        <RouterLink to="/app/work-orders" class="card stat link-card"><span class="label">{{ t('dashboard.receivable') }}</span><span class="value">{{ fmt.money(d.receivable) }}</span>
+          <span v-if="d.milestonesDue" class="small warn">{{ t('dashboard.milestonesDue') }}: {{ fmt.num(d.milestonesDue) }}</span></RouterLink>
+        <RouterLink to="/app/bills" class="card stat link-card" :class="{ alert: d.overdueBills > 0 }"><span class="label">{{ t('dashboard.overdue') }}</span><span class="value">{{ fmt.money(d.overdueAmount) }}</span>
+          <span class="muted small">{{ t('dashboard.bills', { n: fmt.num(d.overdueBills) }) }}</span></RouterLink>
+        <RouterLink to="/app/parties" class="card stat link-card"><span class="label">{{ t('dashboard.partyDue') }}</span><span class="value">{{ fmt.money(d.partyDue) }}</span>
+          <span class="muted small">{{ t('dashboard.totalDue') }}: {{ fmt.money(d.totalDue) }}</span></RouterLink>
+      </div>
+
+      <div class="card mt">
+        <h2>{{ t('dashboard.costSplit') }}</h2>
+        <div v-for="s in SOURCES" :key="s" class="hbar">
+          <div class="flex" style="justify-content: space-between"><span>{{ t(`profit.sources.${s}`) }}</span><strong>{{ fmt.money(d.periodSplit[s]) }}</strong></div>
+          <div class="bar"><span :style="{ width: (Number(d.periodSplit[s]) / splitMax) * 100 + '%' }" /></div>
+        </div>
       </div>
 
       <div class="card mt">
@@ -99,4 +121,9 @@ const trendMax = computed(() => Math.max(1, ...trend.value.map((x) => x.amount))
 .tcol span { display: block; width: 100%; background: var(--p-primary-400); border-radius: 3px 3px 0 0; min-height: 1px; }
 .tcol:hover span { background: var(--p-primary-600); }
 .hbar { display: grid; gap: 4px; margin-bottom: 12px; }
+.section { font-size: 1rem; font-weight: 600; margin: 20px 0 10px; color: var(--app-muted); }
+.link-card { text-decoration: none; color: inherit; }
+.link-card:hover { border-color: var(--p-primary-300); }
+.link-card.alert { border-color: #f87171; }
+.warn { color: #b45309; }
 </style>

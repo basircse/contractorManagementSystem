@@ -1,0 +1,366 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>ঠিকাদার ব্যবস্থাপনা নির্দেশিকা</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@500;600;700&family=Hind+Siliguri:wght@400;500;600&display=swap">
+<style>
+  /* Layout: a site-office handbook — sticky contents rail on wide screens, one reading column, screenshots full width. */
+  :root {
+    --bg: #f5f7f6;
+    --paper: #ffffff;
+    --ink: #17252a;
+    --muted: #5d6f73;
+    --line: #dde5e3;
+    --teal: #0f766e;
+    --teal-soft: #e3f2ef;
+    --rail: #0f2a2a;
+    --rail-ink: #cfe3e1;
+    --amber: #a15c07;
+    --amber-soft: #fdf3e2;
+    --display: 'Anek Bangla', 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif;
+    --body: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif;
+    --s1: 0.875rem; --s2: 1rem; --s3: 1.125rem; --s4: 1.375rem; --s5: 1.75rem; --s6: 2.4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0d1716; --paper: #132120; --ink: #e2ecea; --muted: #94a9a6; --line: #26393a;
+      --teal: #5eead4; --teal-soft: #163a36; --rail: #091312; --rail-ink: #b7cfcc;
+      --amber: #f5b14a; --amber-soft: #2e2412; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0d1716; --paper: #132120; --ink: #e2ecea; --muted: #94a9a6; --line: #26393a;
+    --teal: #5eead4; --teal-soft: #163a36; --rail: #091312; --rail-ink: #b7cfcc;
+    --amber: #f5b14a; --amber-soft: #2e2412; color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: var(--s2); line-height: 1.75; }
+  .wrap { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 40px; max-width: 1180px; margin: 0 auto; padding-inline: 24px; padding-block: 0 64px; }
+  h1, h2, h3 { font-family: var(--display); line-height: 1.3; text-wrap: balance; }
+  a { color: var(--teal); }
+
+  /* contents rail */
+  nav.toc { position: sticky; top: env(safe-area-inset-top, 0px); align-self: start; padding-block: 32px; }
+  nav.toc .box { background: var(--rail); color: var(--rail-ink); border-radius: 12px; padding: 18px 16px; }
+  nav.toc .label { font-size: var(--s1); letter-spacing: 0.04em; opacity: 0.7; margin-bottom: 6px; }
+  nav.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; counter-reset: c; }
+  nav.toc li { counter-increment: c; }
+  nav.toc a { display: flex; gap: 8px; color: inherit; text-decoration: none; padding: 5px 8px; border-radius: 6px; font-size: 0.95rem; }
+  nav.toc a::before { content: counter(c, bengali) "."; opacity: 0.6; min-width: 1.2em; }
+  nav.toc a:hover, nav.toc a:focus-visible { background: rgba(255, 255, 255, 0.08); color: #fff; outline: none; }
+
+  main { min-width: 0; padding-block: 32px; }
+  header.top { padding-bottom: 24px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
+  .eyebrow { font-size: var(--s1); color: var(--teal); font-weight: 600; letter-spacing: 0.04em; }
+  header.top h1 { font-size: var(--s6); margin: 4px 0 8px; }
+  header.top p { margin: 0; color: var(--muted); max-width: 62ch; font-size: var(--s3); }
+
+  section { padding-top: 40px; scroll-margin-top: 16px; }
+  section > h2 { font-size: var(--s5); margin: 0 0 6px; display: flex; gap: 12px; align-items: baseline; }
+  section > h2 .n { font-size: var(--s3); color: var(--teal); font-weight: 600; }
+  section > .lead { color: var(--muted); margin: 0 0 16px; max-width: 65ch; }
+  h3 { font-size: var(--s4); margin: 28px 0 6px; }
+  p, li { max-width: 68ch; }
+  ul.plain { padding-left: 1.2em; margin: 8px 0; }
+  ul.plain li { margin: 4px 0; }
+  b, strong { font-weight: 600; }
+  .ui { font-weight: 600; background: var(--teal-soft); color: var(--teal); padding: 0 6px; border-radius: 4px; white-space: nowrap; }
+
+  /* flow of the business */
+  .flow { display: grid; gap: 10px; margin: 20px 0 4px; }
+  .lane { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 12px; align-items: center; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+  .lane .who { font-family: var(--display); font-weight: 600; color: var(--muted); }
+  .steps { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .steps span { background: var(--teal-soft); color: var(--ink); border-radius: 999px; padding: 2px 12px; font-size: 0.95rem; }
+  .steps i { font-style: normal; color: var(--muted); }
+
+  /* numbered procedure — real sequences only */
+  ol.proc { list-style: none; padding: 0; margin: 12px 0; display: grid; gap: 10px; counter-reset: p; }
+  ol.proc > li { counter-increment: p; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; }
+  ol.proc > li::before { content: counter(p, bengali); font-family: var(--display); font-weight: 700; color: var(--paper); background: var(--teal); width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; margin-top: 2px; }
+
+  figure { margin: 18px 0 8px; }
+  figure a { display: block; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--paper); }
+  figure img { display: block; width: 100%; height: auto; }
+  figure.crop a { max-height: 560px; }
+  figcaption { font-size: var(--s1); color: var(--muted); margin-top: 6px; }
+
+  /* the wage / rent arithmetic, written the way a site munshi writes it */
+  .calc { background: var(--paper); border: 1px solid var(--line); border-left: 4px solid var(--teal); border-radius: 8px; padding: 14px 18px; margin: 14px 0; font-variant-numeric: tabular-nums; }
+  .calc .f { font-family: var(--display); font-weight: 600; font-size: var(--s3); }
+  .calc table { border-collapse: collapse; margin-top: 8px; width: 100%; max-width: 520px; }
+  .calc td { padding: 3px 0; border-bottom: 1px dashed var(--line); }
+  .calc td:last-child { text-align: right; white-space: nowrap; }
+  .calc tr.total td { font-weight: 600; border-bottom: none; border-top: 1px solid var(--ink); }
+
+  .note { background: var(--amber-soft); border-radius: 8px; padding: 10px 14px; margin: 14px 0; color: var(--ink); }
+  .note b { color: var(--amber); }
+
+  .twocol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 14px 0; }
+  .term { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; min-width: 0; }
+  .term h4 { font-family: var(--display); margin: 0 0 4px; font-size: var(--s3); }
+  .term p { margin: 0; font-size: 0.95rem; color: var(--muted); }
+
+  .tablebox { overflow-x: auto; margin: 12px 0; }
+  table.grid { border-collapse: collapse; width: 100%; min-width: 520px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+  table.grid th, table.grid td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.grid th { font-family: var(--display); font-weight: 600; background: var(--teal-soft); }
+
+  footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: var(--s1); }
+
+  @media (max-width: 900px) {
+    .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; padding-inline: 16px; }
+    nav.toc { position: static; padding-block: 16px 0; }
+    header.top h1 { font-size: var(--s5); }
+    .twocol { grid-template-columns: minmax(0, 1fr); }
+    .lane { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+<div class="wrap">
+  <nav class="toc" aria-label="সূচিপত্র">
+    <div class="box">
+      <div class="label">সূচিপত্র</div>
+      <ol>
+        <li><a href="#shuru">শুরু করার আগে</a></li>
+        <li><a href="#hajira">দৈনিক হাজিরা ও ওভারটাইম</a></li>
+        <li><a href="#mojuri">মজুরি বিল ও পরিশোধ</a></li>
+        <li><a href="#ay">আয়: কোটেশন থেকে আদায়</a></li>
+        <li><a href="#khoroch">খরচ ও পার্টি</a></li>
+        <li><a href="#report">রিপোর্ট ও লাভ-ক্ষতি</a></li>
+        <li><a href="#niyom">নিয়মিত কাজের তালিকা</a></li>
+      </ol>
+    </div>
+  </nav>
+
+  <main>
+    <header class="top">
+      <div class="eyebrow">সংক্ষিপ্ত ব্যবহার নির্দেশিকা · ঠিকাদারদের জন্য</div>
+      <h1>ঠিকাদার ব্যবস্থাপনা সফটওয়্যার</h1>
+      <p>শ্রমিকের হাজিরা, মজুরি, ক্লায়েন্টের বিল, মালামাল ও ভাড়ার খরচ — সব এক জায়গায়। প্রতিটি টাকা কোন সাইটের কোন তলার কোন কাজে খরচ হলো, আর কোন কাজে কত লাভ হলো, এই নির্দেশিকায় তা ধাপে ধাপে দেখানো হলো।</p>
+    </header>
+
+    <div class="flow" aria-label="ব্যবসার প্রবাহ">
+      <div class="lane"><div class="who">শ্রম</div>
+        <div class="steps"><span>শ্রমিক ও মজুরি হার</span><i>→</i><span>দৈনিক হাজিরা + ওভারটাইম</span><i>→</i><span>মজুরি পরিশোধ</span></div></div>
+      <div class="lane"><div class="who">আয়</div>
+        <div class="steps"><span>কোটেশন</span><i>→</i><span>কার্যাদেশ</span><i>→</i><span>বিল পরিকল্পনা</span><i>→</i><span>বিল</span><i>→</i><span>আদায়</span></div></div>
+      <div class="lane"><div class="who">খরচ</div>
+        <div class="steps"><span>মালামাল ক্রয়</span><span>ভাড়া / ধার</span><span>সাব-কন্ট্রাক্ট</span><span>অন্যান্য খরচ</span><i>→</i><span>পার্টির দেনা</span></div></div>
+      <div class="lane"><div class="who">ফলাফল</div>
+        <div class="steps"><span>লাভ-ক্ষতি</span><span>কাজভিত্তিক খরচ</span><span>শ্রমিকের ইতিহাস</span><span>ড্যাশবোর্ড</span></div></div>
+    </div>
+
+    <!-- ১ -->
+    <section id="shuru">
+      <h2><span class="n">১</span>শুরু করার আগে</h2>
+      <p class="lead">অ্যাডমিন আপনার জন্য একটি লগইন তৈরি করে দেবেন। লগইনের পর উপরের <span class="ui">বাংলা / English</span> বোতাম দিয়ে ভাষা বদলানো যায়। বাংলায় সব সংখ্যা বাংলা অঙ্কে ও লাখ-কোটি হিসাবে দেখায় (যেমন ৳ ১২,৫০,০০০)।</p>
+      <p>প্রথমবার ব্যবহারের আগে <b>সেটআপ</b> মেনু থেকে এই চারটি জিনিস একবার ঠিক করে নিন:</p>
+      <ol class="proc">
+        <li><div><b>প্রকল্প কাঠামো</b> — ক্লায়েন্ট → সাইট → ভবন → তলা → ইউনিট। যত গভীর পর্যন্ত লিখবেন, খরচের হিসাবও তত সূক্ষ্ম হবে।</div></li>
+        <li><div><b>কাজের ধরন</b> — ইটের গাঁথুনি, প্লাস্টার, কলাম ঢালাই, সাটারিং ইত্যাদি তৈরি করা আছে; দরকার হলে নতুন যোগ করুন।</div></li>
+        <li><div><b>শ্রমিক</b> — নাম, ফোন, এনআইডি আর দক্ষতা স্তর (হেলপার, মিস্ত্রি, জুনিয়র, সিনিয়র, এক্সপার্ট)।</div></li>
+        <li><div><b>মজুরি হার</b> — প্রতিটি দক্ষতা স্তরের দৈনিক মজুরি, দক্ষতা ভাতা ও ওভারটাইমের ঘণ্টাপ্রতি হার। কোনো সাইটে আলাদা হার থাকলে সেই সাইটের জন্য আলাদা হার কার্ড দিন — সেটিই অগ্রাধিকার পাবে। হার বদলালে আগের হাজিরার হিসাব বদলায় না।</div></li>
+      </ol>
+      <div class="note"><b>মালামাল তালিকা</b> (সিমেন্ট, রড, বালু, ইট, কাঠ, বাঁশ, স্টিল সাটার, জ্যাক, পিন, তার…) আগে থেকেই দেওয়া আছে। সেটআপ › মালামাল তালিকা থেকে নতুন মালামাল যোগ করা যায়।</div>
+    </section>
+
+    <!-- ২ -->
+    <section id="hajira">
+      <h2><span class="n">২</span>দৈনিক হাজিরা ও ওভারটাইম</h2>
+      <p class="lead">হাজিরা শুধু উপস্থিতি নয় — কে কোথায় কোন কাজে কতটুকু সময় দিল, সেটাও। এখান থেকেই প্রতিটি কাজের শ্রম-খরচ বের হয়।</p>
+      <p>মেনু: <span class="ui">দৈনিক কাজ › দৈনিক হাজিরা</span>। উপরে ডানদিকে তারিখ বেছে নিন, তারপর তিনটি ধাপ:</p>
+      <ol class="proc">
+        <li><div><b>স্থান</b> — সাইট বাছাই করুন; চাইলে ভবন, তলা ও ইউনিট।</div></li>
+        <li><div><b>কাজ</b> — কাজের ধরনে চাপ দিন। নিচে <b>পূর্ণ দিন / অর্ধ দিন / সিকি দিন</b> বেছে নিন, আর ওভারটাইম হলে <b>ওভারটাইম ঘণ্টা</b> লিখুন।</div></li>
+        <li><div><b>শ্রমিক</b> — একসাথে অনেক শ্রমিক টিক দিন, তারপর <span class="ui">হাজিরা দিন</span>। একই দিনে কেউ দুই কাজে অর্ধেক অর্ধেক সময় দিলে আবার ধাপ ২ থেকে দ্বিতীয় কাজটি যোগ করুন।</div></li>
+      </ol>
+      <figure class="crop">
+        <a href="img/attendance.png" target="_blank" rel="noopener"><img src="img/attendance.png" alt="দৈনিক হাজিরা পাতা: স্থান, কাজ ও শ্রমিক নির্বাচনের তিন ধাপ এবং নিচে দিনের হাজিরার তালিকা" loading="lazy"></a>
+        <figcaption>দৈনিক হাজিরা। কারও দিনের কিছু অংশ আগেই দেওয়া থাকলে কার্ডে কত বাকি তা লেখা থাকে (যেমন “০.৫ বাকি”); বাছাই করা অংশের চেয়ে কম বাকি থাকলে কার্ড ধূসর হয়ে যায়। নিচে দিনের তালিকা থেকে <b>সম্পাদনা</b> বা <b>মুছুন</b>।</figcaption>
+      </figure>
+
+      <h3>মজুরি কীভাবে হিসাব হয়</h3>
+      <div class="calc">
+        <div class="f">মজুরি = দিনের অংশ × (দৈনিক মজুরি + দক্ষতা ভাতা) + ওভারটাইম ঘণ্টা × ওভারটাইম হার</div>
+        <table aria-label="উদাহরণ: সিনিয়র মিস্ত্রি, পূর্ণ দিন, ৩ ঘণ্টা ওভারটাইম">
+          <tr><td>সিনিয়র — পূর্ণ দিন (১ × ৳ ১,১০০)</td><td>৳ ১,১০০</td></tr>
+          <tr><td>দক্ষতা ভাতা (১ × ৳ ১০০)</td><td>৳ ১০০</td></tr>
+          <tr><td>ওভারটাইম ৩ ঘণ্টা × ৳ ১৪০</td><td>৳ ৪২০</td></tr>
+          <tr class="total"><td>ঐ দিনের মজুরি</td><td>৳ ১,৬২০</td></tr>
+        </table>
+      </div>
+      <ul class="plain">
+        <li>ওভারটাইম নিজে হিসাব হয় না — ঘণ্টা আপনাকে হাতে লিখতে হবে।</li>
+        <li>একজন শ্রমিকের এক দিনে মোট এক দিনের বেশি দেওয়া যাবে না; চেষ্টা করলে সতর্কবার্তা আসবে।</li>
+        <li>মজুরি হার না থাকলে হাজিরা নেবে না — আগে <span class="ui">মজুরি হার</span> যোগ করুন।</li>
+        <li>ভুল হলে দিনের তালিকা থেকে সম্পাদনা করুন। পুরনো হিসাব মুছে যায় না, সংশোধনী হিসেবে লেখা থাকে।</li>
+      </ul>
+    </section>
+
+    <!-- ৩ -->
+    <section id="mojuri">
+      <h2><span class="n">৩</span>মজুরি বিল ও পরিশোধ</h2>
+      <p class="lead">প্রতিটি শ্রমিক কত টাকা অর্জন করেছে, কত পেয়েছে আর কত বকেয়া — হাজিরা থেকে আপনা-আপনি হিসাব হয়।</p>
+      <p>মেনু: <span class="ui">দৈনিক কাজ › মজুরি পরিশোধ</span>। প্রতিটি সারিতে <b>অর্জিত − পরিশোধিত = বকেয়া</b>। সারির <span class="ui">পরিশোধ যোগ</span> চাপলে বকেয়া টাকা আগে থেকেই বসানো থাকে।</p>
+      <div class="twocol">
+        <div class="term"><h4>মজুরি</h4><p>সাপ্তাহিক বা মাসিক মজুরি পরিশোধ। বকেয়া থেকে কমে।</p></div>
+        <div class="term"><h4>অগ্রিম</h4><p>কাজের আগে দেওয়া টাকা। বকেয়া থেকে কমে; বেশি দিলে বকেয়া ঋণাত্মক (কমলা রঙে) দেখায়।</p></div>
+      </div>
+      <figure>
+        <a href="img/payments.png" target="_blank" rel="noopener"><img src="img/payments.png" alt="মজুরি পরিশোধ ও বকেয়া পাতা: শ্রমিকভিত্তিক অর্জিত, পরিশোধিত ও বকেয়া" loading="lazy"></a>
+        <figcaption>মজুরি পরিশোধ ও বকেয়া — উপরে মোট, নিচে শ্রমিকভিত্তিক হিসাব ও সাম্প্রতিক পরিশোধ।</figcaption>
+      </figure>
+
+      <h3>একজন শ্রমিকের মজুরি বিল (শ্রমিকের ইতিহাস)</h3>
+      <p>মেনু: <span class="ui">রিপোর্ট › শ্রমিকের ইতিহাস</span>। শ্রমিক ও তারিখের সীমা বেছে <span class="ui">দেখুন</span> চাপুন। প্রতিদিন কোন সাইটের কোন তলায় কোন কাজ করেছে, কত দিন, কত ঘণ্টা <b>OT</b> আর কত টাকা — সব এক তালিকায়। উপরে এই সময়ের মোট, অর্জিত/পরিশোধিত ও বকেয়া। শ্রমিককে মজুরি দেওয়ার আগে এই পাতা দেখিয়ে হিসাব মিলিয়ে নিতে পারেন।</p>
+      <figure>
+        <a href="img/labour-history.png" target="_blank" rel="noopener"><img src="img/labour-history.png" alt="শ্রমিকের কাজের ইতিহাস: কাজ ও সাইট অনুযায়ী সারাংশ এবং দিনভিত্তিক তালিকায় OT ঘণ্টা" loading="lazy"></a>
+        <figcaption>সিনিয়র মিস্ত্রি আব্দুল মজিদের এক মাসের হিসাব — যেদিন ৩ ঘণ্টা OT, সেদিন মজুরি ৳ ১,৬২০, বাকি দিন ৳ ১,২০০।</figcaption>
+      </figure>
+    </section>
+
+    <!-- ৪ -->
+    <section id="ay">
+      <h2><span class="n">৪</span>আয়: কোটেশন থেকে আদায়</h2>
+      <p class="lead">ক্লায়েন্টের কাছ থেকে টাকা পাওয়ার পুরো পথ: দর দেওয়া, কাজ পাওয়া, ধাপে ধাপে বিল করা আর টাকা বুঝে নেওয়া।</p>
+      <ol class="proc">
+        <li><div><b>কোটেশন</b> (<span class="ui">আয় ও বিল › কোটেশন</span>) — কাজের তালিকা (BOQ): বিবরণ, একক, পরিমাণ, দর; ছাড় ও শর্তাবলি। প্রিন্ট করে ক্লায়েন্টকে দিন, তারপর “পাঠানো হয়েছে” চিহ্নিত করুন। দর বদলাতে হলে <b>নতুন সংস্করণ</b>।</div></li>
+        <li><div><b>কার্যাদেশ</b> — ক্লায়েন্ট রাজি হলে কোটেশনের সারিতে সবুজ <span class="ui">কার্যাদেশ তৈরি</span>। সাইট, জামানত কর্তন (%) ও ক্লায়েন্টের রেফারেন্স নং দিন। কোটেশন ছাড়াও সরাসরি কার্যাদেশ তৈরি করা যায় — থোক চুক্তি হলে শুধু চুক্তি মূল্য লিখলেই চলবে।</div></li>
+        <li><div><b>বিল পরিকল্পনা</b> — কার্যাদেশের পাতায় মাইলস্টোন লিখুন (যেমন “ছাদ ঢালাই”), অথবা <span class="ui">কিস্তি তৈরি</span> দিয়ে সাপ্তাহিক / মাসিক সমান কিস্তি বানান। সময় হলে কিস্তির পাশে “বিল করার সময় হয়েছে” দেখাবে।</div></li>
+        <li><div><b>বিল</b> — <span class="ui">বিল করুন</span> বা <span class="ui">নতুন বিল</span>। আগে খসড়া রাখুন, ঠিক থাকলে <b>জমা দিন</b>। জমা দেওয়ার পর বিল আর বদলানো যায় না (টাকা না পেলে “সংশোধনের জন্য খুলুন” করা যায়)।</div></li>
+        <li><div><b>আদায়</b> — টাকা পেলে বিলের পাশে <span class="ui">টাকা গ্রহণ</span>: তারিখ, টাকা, মাধ্যম (নগদ / ব্যাংক / চেক / মোবাইল ব্যাংকিং) ও চেক নম্বর। বিল ছাড়া অগ্রিম টাকাও নেওয়া যায়।</div></li>
+      </ol>
+
+      <h3>তিন রকম বিল</h3>
+      <div class="tablebox">
+        <table class="grid">
+          <tr><th>বিলের ধরন</th><th>কখন ব্যবহার করবেন</th></tr>
+          <tr><td>মাইলস্টোন / কিস্তি</td><td>পরিকল্পনার একটি কিস্তি বা ধাপের নির্দিষ্ট টাকা।</td></tr>
+          <tr><td>কাজের পরিমাপ (চলতি বিল)</td><td>এই বিলে কোন কাজ কতটুকু হয়েছে (যেমন ৩,৫০০ সিএফটি গাঁথুনি)। কার্যাদেশের দরে টাকা হিসাব হয়; আগে কত বিল হয়েছে ও কত বাকি তাও দেখায়।</td></tr>
+          <tr><td>অন্যান্য</td><td>অতিরিক্ত কাজ, জামানত ফেরতের বিল ইত্যাদি — নিজে লাইন লিখুন।</td></tr>
+        </table>
+      </div>
+      <div class="calc">
+        <div class="f">নিট প্রাপ্য = মোট বিল − জামানত কর্তন − অন্যান্য কর্তন (ভ্যাট / এআইটি)</div>
+        <table aria-label="উদাহরণ বিল">
+          <tr><td>মোট বিল (মাসিক কিস্তি ২)</td><td>৳ ৪,৬৮,৩৩৩</td></tr>
+          <tr><td>জামানত কর্তন ৫%</td><td>− ৳ ২৩,৪১৬.৬৫</td></tr>
+          <tr class="total"><td>নিট প্রাপ্য</td><td>৳ ৪,৪৪,৯১৬.৩৫</td></tr>
+        </table>
+      </div>
+      <figure class="crop">
+        <a href="img/work-order.png" target="_blank" rel="noopener"><img src="img/work-order.png" alt="কার্যাদেশের পাতা: চুক্তি মূল্য, বিল, আদায় ও পাওনা; কাজের তালিকা, বিল পরিকল্পনা, বিল ও আদায়ের তালিকা" loading="lazy"></a>
+        <figcaption>কার্যাদেশের পাতা — উপরের চারটি ঘরে চুক্তি মূল্য, বিল হয়েছে, আদায় হয়েছে আর ক্লায়েন্টের কাছে পাওনা। নিচে কাজের তালিকা, বিল পরিকল্পনা, বিল ও আদায়।</figcaption>
+      </figure>
+      <figure>
+        <a href="img/bill-print.png" target="_blank" rel="noopener"><img src="img/bill-print.png" alt="প্রিন্ট করা বিল: প্রতিষ্ঠানের নাম-ঠিকানা, ক্লায়েন্ট, বিল নং, কাজের লাইন, কর্তন, কথায় টাকার পরিমাণ ও চলতি বিলের সারাংশ" loading="lazy"></a>
+        <figcaption>প্রিন্টের জন্য তৈরি বিল — আপনার প্রতিষ্ঠানের নাম-ঠিকানাসহ, টাকার পরিমাণ কথায়, আর চুক্তি মূল্য / পূর্ববর্তী বিল / ক্রমপুঞ্জিত / বাকি।</figcaption>
+      </figure>
+      <div class="note"><b>খেয়াল রাখুন:</b> শুধু <b>জমা দেওয়া</b> বিলই আয় ও পাওনা হিসেবে গোনা হয়। খসড়া বিল কোনো রিপোর্টে আসে না। পরিশোধের শেষ তারিখ পার হয়ে গেলে বিলে লাল “মেয়াদোত্তীর্ণ” দেখায়।</div>
+    </section>
+
+    <!-- ৫ -->
+    <section id="khoroch">
+      <h2><span class="n">৫</span>খরচ ও পার্টি</h2>
+      <p class="lead">শ্রমিকের মজুরি ছাড়া বাকি সব খরচ এখানে। প্রতিটি খরচ কোন সাইট / তলায় আর কোন কাজে, তা লিখে দিলে লাভ-ক্ষতির হিসাব সঠিক হয়।</p>
+
+      <h3>পার্টি ও দেনা</h3>
+      <p>যাদের কাছ থেকে মালামাল কেনেন, শাটারিং ভাড়া নেন বা যাদের দিয়ে কাজ করান — সবাই <b>পার্টি</b> (সরবরাহকারী, সাব-কন্ট্রাক্টর, ভাড়া প্রদানকারী)। প্রতিটি পার্টির <b>মোট দেনা − পরিশোধিত = বাকি দেনা</b>। নামে চাপলে <b>হিসাব বিবরণী</b> খোলে — তারিখ অনুযায়ী প্রতিটি ক্রয়, ভাড়া, বিল ও পরিশোধ আর চলমান স্থিতি।</p>
+      <figure>
+        <a href="img/parties.png" target="_blank" rel="noopener"><img src="img/parties.png" alt="পার্টি ও দেনা পাতা: পার্টিভিত্তিক মোট দেনা, পরিশোধিত ও বাকি" loading="lazy"></a>
+        <figcaption>পার্টি ও দেনা — উপরের <span class="ui">পরিশোধ</span> বোতাম দিয়ে যেকোনো পার্টিকে টাকা দেওয়ার হিসাব রাখুন।</figcaption>
+      </figure>
+
+      <h3>মালামাল ক্রয়</h3>
+      <p>একটি চালানে কয়েকটি মালামাল (রড, সিমেন্ট…) — পরিমাণ × দর। পার্টি না দিলে “নগদ (বাজার থেকে)” ধরা হয়। পার্টির কাছ থেকে কিনে কিছু টাকা সাথে সাথে দিলে <b>এখনই পরিশোধ</b> ঘরে লিখুন; বাকিটা পার্টির দেনায় যোগ হবে।</p>
+      <figure>
+        <a href="img/purchases.png" target="_blank" rel="noopener"><img src="img/purchases.png" alt="মালামাল ক্রয়ের তালিকা" loading="lazy"></a>
+      </figure>
+
+      <h3>ভাড়া ও ধার করা মালামাল (স্টিল সাটার, জ্যাক, বাঁশ, পিন…)</h3>
+      <p>মালামাল সাইটে এলে <span class="ui">মালামাল আনা হয়েছে</span>: কত পিস, প্রতিদিন প্রতি পিসের ভাড়া, আনার তারিখ। বিনা ভাড়ায় ধার নিলে ভাড়া ০ দিন — তবু কী কী ফেরত দিতে হবে, তার হিসাব থাকবে।</p>
+      <div class="calc">
+        <div class="f">ভাড়া = সাইটে থাকা পরিমাণ × দৈনিক ভাড়া × দিন</div>
+        <table aria-label="উদাহরণ: স্টিল সাটার ভাড়া">
+          <tr><td>মাস শেষে হিসাব: ৩০০ পিস × ৳ ৩ × ৩০ দিন</td><td>৳ ২৭,০০০</td></tr>
+          <tr><td>১০০ পিস ফেরতের দিন পর্যন্ত: ৩০০ × ৳ ৩ × ৪ দিন</td><td>৳ ৩,৬০০</td></tr>
+          <tr class="total"><td>হিসাবকৃত ভাড়া</td><td>৳ ৩০,৬০০</td></tr>
+        </table>
+      </div>
+      <ul class="plain">
+        <li><b>ভাড়া হিসাব</b> (ক্যালকুলেটর আইকন) — মাস শেষে বা পার্টি বিল দিলে, ঐ তারিখ পর্যন্ত ভাড়া খরচে যোগ হয়।</li>
+        <li><b>ফেরত দিন</b> — আংশিক ফেরতও চলে; ফেরতের দিন পর্যন্ত বাকি ভাড়া নিজে থেকেই হিসাব হয়। সব ফেরত গেলে অবস্থা “ফেরত দেওয়া হয়েছে”।</li>
+        <li><b>চলমান ভাড়া</b> — শেষ হিসাবের পর থেকে আজ পর্যন্ত জমা হওয়া ভাড়া, যা এখনও খরচে যোগ হয়নি।</li>
+        <li>ভুল হলে <b>শেষ এন্ট্রি বাতিল</b>।</li>
+      </ul>
+      <figure>
+        <a href="img/rentals.png" target="_blank" rel="noopener"><img src="img/rentals.png" alt="ভাড়া ও ধার করা মালামালের তালিকা: সাইটে আছে, দৈনিক ভাড়া, হিসাবকৃত ও চলমান ভাড়া" loading="lazy"></a>
+      </figure>
+
+      <h3>সাব-কন্ট্রাক্ট (তৃতীয় পক্ষের কাজ)</h3>
+      <p>বৈদ্যুতিক কাজ, টাইলস ফিটিং ইত্যাদি অন্য কাউকে দিয়ে করালে: পার্টি, কাজের বিবরণ, স্থান, আর পরিমাণ × দর অথবা থোক টাকা। কাজ যত এগোবে, তাদের বিল <span class="ui">কাজের বিল যোগ</span> দিয়ে লিখুন — বিলের টাকা খরচ ও পার্টির দেনায় যায়। “বাকি” দেখায় চুক্তির আর কত টাকার বিল আসবে।</p>
+
+      <h3>অন্যান্য খরচ</h3>
+      <p>পরিবহন, জ্বালানি, খাবার/নাস্তা, বিদ্যুৎ/পানি, যন্ত্রপাতি, মেরামত, অফিস খরচ। নগদ হলে পার্টি খালি রাখুন; বাকিতে হলে পার্টি বেছে দিন।</p>
+    </section>
+
+    <!-- ৬ -->
+    <section id="report">
+      <h2><span class="n">৬</span>রিপোর্ট ও লাভ-ক্ষতি</h2>
+      <p class="lead">সব রিপোর্ট সরাসরি হাজিরা, বিল ও খরচ থেকে তৈরি হয় — আলাদা করে কিছু লিখতে হয় না। প্রতিটি রিপোর্ট প্রিন্ট করা যায়।</p>
+
+      <h3>ড্যাশবোর্ড</h3>
+      <p>লগইন করলেই প্রথম পাতা। আজকের খরচ ও কর্মরত শ্রমিক, গত ৩০ দিনের খরচ, মোট বকেয়া মজুরি; <b>টাকার অবস্থা</b> অংশে বিল ও আদায়, ক্লায়েন্টের কাছে পাওনা, মেয়াদোত্তীর্ণ বিল আর পার্টির দেনা; এবং খরচের খাত (শ্রম, মালামাল, ভাড়া, সাব-কন্ট্রাক্ট, অন্যান্য)। লাল দাগের ঘর মানে মেয়াদোত্তীর্ণ বিল আছে।</p>
+      <figure class="crop">
+        <a href="img/dashboard.png" target="_blank" rel="noopener"><img src="img/dashboard.png" alt="ড্যাশবোর্ড: আজকের খরচ, টাকার অবস্থা ও খরচের খাত" loading="lazy"></a>
+      </figure>
+
+      <h3>লাভ-ক্ষতি</h3>
+      <p>মেনু: <span class="ui">রিপোর্ট › লাভ-ক্ষতি</span>। তারিখ খালি রাখলে শুরু থেকে আজ পর্যন্ত; একটি সাইট বাছাই করলে শুধু সেই সাইট।</p>
+      <div class="calc">
+        <div class="f">লাভ / ক্ষতি = আয় (জমা দেওয়া বিলের মোট) − খরচ (মজুরি + মালামাল + ভাড়া + সাব-কন্ট্রাক্ট + অন্যান্য)</div>
+      </div>
+      <ul class="plain">
+        <li><b>সাইটভিত্তিক</b> — প্রতিটি সাইটের চুক্তি মূল্য, আয়, খাতভিত্তিক খরচ, লাভ আর লাভের হার (%)।</li>
+        <li><b>কাজভিত্তিক</b> — প্রতিটি কাজের ধরনে (যেমন ইটের গাঁথুনি) চুক্তি, আয়, খরচ ও লাভ। কিস্তি বিলের টাকা কোনো কাজে বাঁধা নেই বলে “নির্দিষ্ট কাজ ছাড়া” সারিতে আসে।</li>
+      </ul>
+      <figure class="crop">
+        <a href="img/profit.png" target="_blank" rel="noopener"><img src="img/profit.png" alt="লাভ-ক্ষতি রিপোর্ট: চুক্তি মূল্য, আয়, খরচ ও লাভ; খরচের খাত; সাইট ও কাজভিত্তিক টেবিল" loading="lazy"></a>
+        <figcaption>লাভ-ক্ষতি। লাল সংখ্যা মানে ক্ষতি।</figcaption>
+      </figure>
+      <div class="note"><b>ক্ষতি দেখালেই ভয় পাবেন না।</b> কাজের শুরুতে মালামাল আগে কেনা হয়, অথচ বিল হয় পরে — তাই প্রথম দিকে ক্ষতি দেখাতে পারে। কাজ হয়ে গেছে কিন্তু বিল করা হয়নি, এমন কাজের বিল জমা দিলে হিসাব ঠিক হয়ে আসবে।</div>
+
+      <h3>কাজভিত্তিক খরচ</h3>
+      <p>মেনু: <span class="ui">রিপোর্ট › কাজভিত্তিক খরচ</span>। সময়, ক্লায়েন্ট, সাইট, ভবন ও তলা দিয়ে ছেঁকে দেখুন কোন কাজে কত দিন শ্রম, কত OT, কতজন শ্রমিক আর খাতভিত্তিক কত টাকা খরচ হলো। নিচে সাইট × কাজের তুলনামূলক টেবিল। কোনো কাজে বাঁধা নয় এমন খরচ (যেমন পরিবহন) “নির্দিষ্ট কাজ ছাড়া খরচ” হিসেবে আলাদা দেখায়।</p>
+      <figure class="crop">
+        <a href="img/item-cost.png" target="_blank" rel="noopener"><img src="img/item-cost.png" alt="কাজভিত্তিক খরচ রিপোর্ট" loading="lazy"></a>
+      </figure>
+    </section>
+
+    <!-- ৭ -->
+    <section id="niyom">
+      <h2><span class="n">৭</span>নিয়মিত কাজের তালিকা</h2>
+      <div class="tablebox">
+        <table class="grid">
+          <tr><th>কখন</th><th>কী করবেন</th></tr>
+          <tr><td>প্রতিদিন</td><td>হাজিরা ও ওভারটাইম; সেদিনের ক্রয় ও অন্যান্য খরচ; ভাড়ার মালামাল এলে বা ফেরত গেলে লিখে রাখা।</td></tr>
+          <tr><td>প্রতি সপ্তাহ</td><td>মজুরি পরিশোধ (শ্রমিকের ইতিহাস দেখে মিলিয়ে); সাপ্তাহিক কিস্তি থাকলে বিল জমা।</td></tr>
+          <tr><td>মাস শেষে</td><td>ভাড়ার মালামালের ভাড়া হিসাব; চলতি / মাসিক বিল জমা; পার্টিকে পরিশোধ ও হিসাব বিবরণী মিলানো; লাভ-ক্ষতি দেখা।</td></tr>
+          <tr><td>টাকা পেলে</td><td>বিলের পাশে <b>টাকা গ্রহণ</b> — চেক / লেনদেন নম্বরসহ।</td></tr>
+        </table>
+      </div>
+      <h3>প্রায়ই জিজ্ঞাসিত</h3>
+      <ul class="plain">
+        <li><b>জমা দেওয়া বিলে ভুল হয়েছে?</b> টাকা না পেয়ে থাকলে “সংশোধনের জন্য খুলুন”, ঠিক করে আবার জমা দিন। টাকা পাওয়ার পর বদলানো যায় না; প্রয়োজনে আদায়টি মুছে তারপর ঠিক করুন।</li>
+        <li><b>অ্যাডমিন কী দেখতে পান?</b> অ্যাডমিন আপনার ব্যবসার রিপোর্ট শুধু দেখতে পারেন, কিছু বদলাতে পারেন না।</li>
+        <li><b>পুরনো হিসাব মুছে গেলে কী হয়?</b> হাজিরা বা খরচ সম্পাদনা / মুছলে আগের হিসাব সংশোধনী এন্ট্রি হিসেবে থেকে যায়, তাই রিপোর্ট সবসময় মেলে।</li>
+      </ul>
+    </section>
+
+    <footer>এই নির্দেশিকার ছবিগুলো নমুনা তথ্য (মেসার্স আল-আমিন কনস্ট্রাকশন) দিয়ে তোলা; আপনার পাতায় আপনার নিজের তথ্য দেখাবে।</footer>
+  </main>
+</div>
+
+</body></html>

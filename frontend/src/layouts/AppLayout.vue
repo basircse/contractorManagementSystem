@@ -30,8 +30,28 @@ const menu = computed<MenuGroup[]>(() => {
       ],
     },
     {
+      label: t('nav.income'),
+      items: [
+        { to: '/app/quotations', label: t('nav.quotations'), icon: 'pi pi-file' },
+        { to: '/app/work-orders', label: t('nav.workOrders'), icon: 'pi pi-briefcase' },
+        { to: '/app/bills', label: t('nav.bills'), icon: 'pi pi-receipt' },
+        { to: '/app/receipts', label: t('nav.receipts'), icon: 'pi pi-money-bill' },
+      ],
+    },
+    {
+      label: t('nav.expenses'),
+      items: [
+        { to: '/app/purchases', label: t('nav.purchases'), icon: 'pi pi-shopping-cart' },
+        { to: '/app/rentals', label: t('nav.rentals'), icon: 'pi pi-box' },
+        { to: '/app/subcontracts', label: t('nav.subcontracts'), icon: 'pi pi-sitemap' },
+        { to: '/app/expenses', label: t('nav.siteExpenses'), icon: 'pi pi-tags' },
+        { to: '/app/parties', label: t('nav.parties'), icon: 'pi pi-id-card' },
+      ],
+    },
+    {
       label: t('nav.reports'),
       items: [
+        { to: '/app/reports/profit', label: t('nav.profit'), icon: 'pi pi-chart-line' },
         { to: '/app/reports/items', label: t('nav.itemReport'), icon: 'pi pi-chart-pie' },
         { to: '/app/reports/labour', label: t('nav.labourReport'), icon: 'pi pi-history' },
       ],
@@ -43,6 +63,7 @@ const menu = computed<MenuGroup[]>(() => {
         { to: '/app/labours', label: t('nav.labours'), icon: 'pi pi-users' },
         { to: '/app/rate-cards', label: t('nav.rateCards'), icon: 'pi pi-money-bill' },
         { to: '/app/work-items', label: t('nav.workItems'), icon: 'pi pi-list' },
+        { to: '/app/materials', label: t('nav.materials'), icon: 'pi pi-th-large' },
       ],
     },
   ]

@@ -40,6 +40,10 @@ const pivot = computed(() => {
   return { items: r.items, rows: [...bySite.values()] }
 })
 
+/** Cost sources that actually occur in this report (labour, material, rent ...). */
+const SOURCES = ['labour', 'material', 'rental', 'subcontract', 'expense'] as const
+const sources = computed(() => SOURCES.filter((s) => Number(report.value?.split?.[s] ?? 0) !== 0))
+
 function print() {
   window.print()
 }
@@ -102,7 +106,7 @@ onMounted(async () => {
         <div class="flex" style="margin-bottom: 8px">
           <h2 style="margin: 0">{{ fmt.date(from) }} – {{ fmt.date(to) }}</h2>
           <span class="spacer" />
-          <span>{{ t('common.total') }}: <strong style="font-size: 1.2rem">{{ fmt.money(report.totalAmount) }}</strong></span>
+          <span>{{ t('common.total') }}: <strong style="font-size: 1.2rem">{{ fmt.money(report.split.total) }}</strong></span>
         </div>
         <DataTable :value="report.items" size="small" striped-rows data-key="workItemId">
           <template #empty><span class="muted">{{ t('common.none') }}</span></template>
@@ -117,6 +121,9 @@ onMounted(async () => {
           </Column>
           <Column :header="t('report.workers')" body-class="num" header-class="num">
             <template #body="{ data }">{{ fmt.num(data.workers) }}</template>
+          </Column>
+          <Column v-for="s in sources.length > 1 ? sources : []" :key="s" :header="t(`profit.sources.${s}`)" body-class="num small" header-class="num">
+            <template #body="{ data }">{{ Number(data[s]) ? fmt.money(data[s]) : '—' }}</template>
           </Column>
           <Column :header="t('attendance.cost')" body-class="num" header-class="num">
             <template #body="{ data }"><strong>{{ fmt.money(data.amount) }}</strong></template>
@@ -135,11 +142,15 @@ onMounted(async () => {
               <Column :footer="fmt.num(report.totalDays)" footer-class="num" />
               <Column />
               <Column />
+              <Column v-for="s in sources.length > 1 ? sources : []" :key="s" />
               <Column :footer="fmt.money(report.totalAmount)" footer-class="num" />
               <Column />
             </Row>
           </ColumnGroup>
         </DataTable>
+        <div v-if="Number(report.generalAmount) !== 0" class="flex mt small" style="justify-content: flex-end">
+          {{ t('report.general') }}: <strong>{{ fmt.money(report.generalAmount) }}</strong>
+        </div>
       </div>
 
       <div v-if="pivot.rows.length > 1" class="card">
